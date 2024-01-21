@@ -1,0 +1,1639 @@
+원하는 페이지의 전체 소스는 
+
+
+
+<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+	<meta name="description" content="경매의핵심. 부동산과 민사집행을 모두 인증받은 법무법인 열린입니다. 행꿈사옥션이 인증된 능력으로 고객님의 투자에 길잡이가 되겠습니다." />
+	<meta name="keywords" content="서울아파트경매, 경기도아파트경매, 수도권 아파트경매, 서울공장경매, 예상낙찰가, 권리분석, 경매컨설팅, 법원경매, 대법원법원경매정보, 무료법원경매, 입찰가분석" />
+	<title>행꿈사옥션</title>
+	<link rel="canonical" href="//www.hksauction.com/"/>
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="행꿈사옥션" />
+	<meta property="og:site_name" content="행꿈사옥션"/>
+	<meta property="og:url" content="//www.hksauction.com/" />
+	<meta property="og:description" content="경매의핵심. 부동산과 민사집행을 모두 인증받은 법무법인 열린입니다. 행꿈사옥션이 인증된 능력으로 고객님의 투자에 길잡이가 되겠습니다." />
+	<meta property="og:image" content="//www.hksauction.com/images/kakao_img.jpg" />
+	<link rel="image_src" href="//www.hksauction.com/images/icon.png" />
+	<!--첫번째 IE9 이전 버전에 HTML5 로딩 방법-->
+	<!--두번째 IE9 이전 버전에 CSS3 로딩 방법-->
+	<!--Upgrade MSIE5.5-6 to be compatible with MSIE7-->
+	<!--[if lt IE 9]>
+		<script src="../js/html5shiv.js"></script>
+		<script src="../js/css3-mediaqueries.js"></script>
+	<![endif]-->
+	<!--[if lte IE 7.0]>
+		<script src="../js/imgSizer.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/reset.css?20240121121319">
+	<link rel="stylesheet" href="../css/layout.css?20240121121319" />
+    <link rel="stylesheet" href="../css/common.css?20240121121319" />
+	<link rel="shortcut icon" href="../images/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="../images/icon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../images/icon.png">
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script> <!-- 제이쿼리 라이이브러리 연동 -->
+	<script type="text/javascript" src="../js/jquery.bxslider.min.js"></script>  <!-- bxSlider 플러그인 연동 -->
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<link rel="stylesheet" href="../js/datepicker/css/ui-lightness/jquery-ui-1.8.16.custom.css" />
+	<script type="text/javascript" src="../js/common.js?20240121121319"></script>
+	<script src="../js/search_form.js?20240121121319"></script>
+	<script src="../js/util_lib.js?20240121121319"></script>
+	<script src="../js/printThis.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../js/main.js?20240121121319"  charset='utf-8'></script>   
+	<script src="../js/java_base64.js" type="text/javascript"></script>
+<script language=JavaScript> 
+function bluring(){ 
+	if(event.srcElement.tagName=="A"||event.srcElement.tagName=="IMG") document.body.focus(); 
+} 
+document.onfocusin=bluring; 
+</script> 
+<script language="javascript">
+<!--
+function addrInit()
+{
+	$("#address1_01").change(function(){
+		loadAddr($(this));
+	});
+	$("#address1_02").change(function(){
+		loadAddr($(this));
+	});
+	loadAddr($("#address1_01"));
+}
+
+
+function loadAddr(obj)
+{
+	var arr=[], html="";
+
+	if(obj.attr("id")=="address1_01")
+	{
+		$("#address1_02").children().remove();
+		$("#address1_03").children().remove();
+		$("#address1_02").append("<option value=''>-구/군-</option>");
+		$("#address1_03").append("<option value=''>-읍/면/동-</option>");
+		
+		
+	}
+	if(obj.attr("id")=="address1_02")
+	{
+	
+		$("#address1_03").children().remove();
+		$("#address1_03").append("<option value=''>-읍/면/동-</option>");
+		
+	}
+
+		var dataR = "address1_01="+$("#address1_01").val()+"&address1_02="+$("#address1_02").val();
+
+	
+	$.ajax({
+		type: "post",
+		url: "../search/addressSearch3.php",
+		
+		data: dataR,
+		
+		dataType: "xml",
+		beforeSend: function(){
+			
+		},
+		
+		success: function(xml){
+			
+			$(xml).find("item").each(function(){
+	    	var $entry=$(this);
+	    	arr.push("<option value='"+$entry.find("addr_code").text()+"'>"+$entry.find("addr_name").text()+"</option>");
+	    	});
+	    	html=arr.join("");
+	    	
+	    	
+		    	var obj_id=$(xml).find("obj_id").text();
+		    	
+		    	if(obj_id=="address1_02"){
+		    		$("#address1_02").children().remove();
+		    			$("#address1_02").append("<option value=''>-구/군-</option>");
+	
+		    	}
+		    		if(obj_id=="address1_03"){
+		    		$("#address1_03").children().remove();
+		    			$("#address1_03").append("<option value=''>-읍/면/동-</option>");
+		    	}
+		    	$("#"+obj_id).append(html);
+	    	
+	    		    	
+	    	//IE6.0 을 위하여 setTimeout 으로 처리
+	    	if(obj.attr("id")=="address1_01" && $("#address2_01").val() > 0)
+			{				
+				setTimeout(function(){
+					$("#address1_01 option[value="+$("#address1_01").val()+"]").attr("selected",true);
+					$("#address2_01").val(0);
+					loadAddr($("#address1_02"));
+				},10);
+				return;
+			}
+			
+			if(obj.attr("id")=="address1_02" && $("#address2_02").val() > 0)
+			{
+				setTimeout(function(){
+					$("#address1_02 option[value="+$("#address2_02").val()+"]").attr("selected",true);
+					$("#address2_02").val(0);
+					loadAddr($("#address1_03"));
+				},10);
+				return;
+			}
+			
+			if(obj.attr("id")=="address1_03" && $("#address2_03").val() > 0)
+			{
+				setTimeout(function(){
+					$("#address1_03 option[value="+$("#address2_03").val()+"]").attr("selected",true);
+					$("#address2_03").val(0);
+				},10);
+			}
+		}
+	});
+	return false;
+}
+//-->
+</script>
+<!--? include "../pop/popup_open.php";?-->
+<meta name="NaverBot" content="All"/>
+<meta name="NaverBot" content="index,follow"/>
+<meta name="Yeti" content="All"/>
+<meta name="Yeti" content="index,follow"/>
+</head>
+<body>
+
+<div id="site_wrap">
+	
+    <script>
+function frmChk() {
+	var frm = document.frm_top2;
+	if(frm.tno.value=='') {
+		alert('사건번호를 입력해주세요.');
+		frm.tno.focus();
+		return false; 
+	}
+	frm.submit();
+}
+</script>
+<div id="header_wrap">
+	<div id="gnb_warp" class="cf">
+    	<div class="container">
+            <div id="gnb_left">
+                <p>
+					                    <span class="mbr_c01">cuptry</span>님 안녕하세요 <span class="mbr_c04">옥션정보</span> 2024-02-02(잔여 <span class="mbr_c05">12</span>일)                                    
+                </p>
+            </div>
+            <div id="gnb_right">
+                <ul>
+                    <!--li><a href="/company/company03.php">행꿈사갤러리</a></li-->
+                    <!--li class="gnb_bar">&nbsp;</li-->
+                    <!--li><a href="../mypage/mypage01.php">관심물건</a></li-->
+                    <li><a href="/billgate/" style="color:#e91b1b;">결제안내</a></li>
+                                        <li class="gnb_bar">&nbsp;</li>
+                    <li><a href="/mypage/mypage01.php">My페이지</a></li>
+                    <li class="gnb_bar">&nbsp;</li>
+                    <li><a href="/member/logout.php">로그아웃</a></li>
+                    <!--li class="gnb_bar">&nbsp;</li>
+                    <li><span class="mbr_c01">cuptry</span>님 <span class="mbr_c04">옥션정보</span> 2024-02-02(잔여 <span class="mbr_c05">12</span>일)</li-->
+					                </ul>
+            </div>
+		</div>            
+    </div><!--gnb_warp-->
+    
+    <div id="lnb_wrap" class="cf">
+    	<h1><a href="../index.php"><img src="../images/logo.png" alt="행꿈사옥션"></a></h1>
+        
+    	<div class="container" style="position:relative;">
+    	<h4><a href="/company/company07.php"><img src="../images/ytb_talk.png" alt="카카오톡" style=" width:80px;"/></a>&nbsp;<a href="https://pf.kakao.com/_daprb/chat" target="_blank"><img src="../images/k_talk.png" alt="카카오톡" style=" width:80px;"/></a></h4>
+            
+            <div id="lnb_box">
+                <div id="lnb">
+                    <ul class="cf">
+                        <li class="showme_01">
+                        	<a href="../search/search01.php">경매검색</a>
+                            <div id="lnb_down" class="bubble_nav sub_01">
+                                <ul>
+                                    <li><a href="../search/search01.php">종합검색</a></li>
+                                    <li><a href="../search/search02.php">법원별검색</a></li>
+                                    <li><a href="../search/search03.php">일정별검색</a></li>
+									                                    <li><a href="../search/search05.php">신건검색</a></li>
+                                    <li><a href="../search/search06.php">특수물건</a></li>
+                                    <li><a href="../search/search07.php">테마물건</a></li>
+                                    <li><a href="../search/search08.php">예정물건</a></li>
+                                    <li><a href="../search/search09_jido.php" target="_blank">지도검색</a></li>
+									<li><a href="../search/search11.php">회원제보물건</a></li>
+																		<li><a href="../search/search16.php">낙찰가입력</a></li>
+									                                </ul>
+                            </div>
+						</li>
+                        <li class="showme_02">
+                        	<a href="../public/public01.php">공매검색</a>
+                        	<div id="lnb_down" class="bubble_nav sub_02">
+                                <ul>
+                                    <li><a href="../public/public01.php">공매종합검색</a></li>
+                                    <li><a href="../public/public02.php">처분신탁 공매물건</a></li>
+                                </ul>
+                            </div>    
+						</li>
+                        <li class="showme_08">
+                        	<a href="/search/search09_jido.php" target="_blank">지도검색</a>
+                        </li>
+                        <li class="showme_03">
+                        	<a href="../recom/recom01.php">추천물건</a>
+                        	<div id="lnb_down" class="bubble_nav sub_03">
+                                <ul>
+                                    <li><a href="../recom/recom05.php">추천물건시스템</a></li>
+									<li><a href="../recom/recom04.php">추천물건샘플</a></li>
+                                    <li><a href="../recom/recom01.php">일반물건</a></li>
+                                    <li><a href="../recom/recom02.php">특수물건</a></li>
+									<li><a href="../bbs/bbs_list.php?code=gongnotice">공매추천물건</a></li>
+                                    <li><a href="../billgate/">결제안내</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="showme_07">
+                        	<a href="/company/company04.php">행꿈사컨설팅</a>
+                        </li>
+                        <li class="showme_04">
+                        	<a href="../annual/annual01.php" class="crown">아너스클럽</a>
+                            <div id="lnb_down" class="bubble_nav sub_04">
+                                <ul>
+                                    <li><a href="../annual/annual01.php">공지사항</a></li>
+                                    <li><a href="../recom/recom03.php">추천물건</a></li>
+                                    <li><a href="../annual/annual03.php">정변호사 특별칼럼</a></li>
+                                    <li><a href="../annual/annual04.php">해피드림s소식</a></li>
+                                    <li><a href="../annual/annual05.php">특별동영상강의</a></li>
+                                </ul>
+                            </div>
+						</li>
+                        <li class="showme_09">
+                        	<a href="https://cafe.naver.com/acutionangel" target="_blank">행꿈사카페</a>
+                        </li>
+                        <li class="showme_05">
+                        	<a href="../comu/comu01.php">교육/커뮤니티</a>
+                            <div id="lnb_down" class="bubble_nav sub_05">
+                                <ul>
+                                    <li><a href="../comu/comu01.php">공지사항</a></li>
+                                    <li><a href="../comu/comu02.php">보도자료</a></li>
+                                    <li><a href="../comu/comu03.php">정변호사칼럼</a></li>
+                                    <li><a href="../comu/comu04.php">전문가칼럼</a></li>
+                                    <li><a href="../comu/comu05.php">3억원프로젝트</a></li>
+                                    <li><a href="../comu/comu06.php">경매낙찰수기</a></li>
+                                    <li><a href="https://cafe.naver.com/acutionangel" target="_blank">행꿈사아카데미</a></li>
+									<li><a href="https://www.haengkkumsa.com" target="_blank">행꿈사닷컴</a></li>
+                                    <li><a href="../comu/comu09.php">해피머니/대출안내</a></li>
+									<li><a href="../comu/comu13.php">관련서식</a></li>
+									<li><a href="../comu/comu11.php">행꿈사서식</a></li>
+                                </ul>
+                            </div>
+						</li>
+                        <li class="showme_06">
+                        	<a href="../company/company01.php">회사소개</a>
+                            <div id="lnb_down" class="bubble_nav sub_06">
+                                <ul>
+                                    <li><a href="../company/company01.php">인사말</a></li>
+                                    <!--li><a href="../company/company02.php">공지사항</a></li-->
+                                    <li><a href="../company/company03.php">행꿈사갤러리</a></li>
+        							<li><a href="../company/company07.php">행꿈사옥션TV</a></li>
+                                    <li><a href="../company/company04.php">행꿈사옥션컨설팅</a></li>
+                                    <li><a href="../company/company05.php">오시는길</a></li>
+                                </ul>
+                            </div>
+						</li>
+                    </ul>
+                </div><!--lnb-->
+            </div><!--lnb_box-->   
+            
+            <div id="tk_wrap">
+				<form name="frm_top2" action="/search/search_list.php" method="get" target="_top" onsubmit="return frmChk(this)">
+				<input type="hidden" name="aresult" value="all">
+                <ul>
+                    <li><select name="sno" class="tk_select">
+                            <option value="">연도</option>
+                                                        <option value="2024">
+                            2024                            </option>
+                                                        <option value="2023">
+                            2023                            </option>
+                                                        <option value="2022">
+                            2022                            </option>
+                                                        <option value="2021">
+                            2021                            </option>
+                                                        <option value="2020">
+                            2020                            </option>
+                                                        <option value="2019">
+                            2019                            </option>
+                                                        <option value="2018">
+                            2018                            </option>
+                                                        <option value="2017">
+                            2017                            </option>
+                                                        <option value="2016">
+                            2016                            </option>
+                                                        <option value="2015">
+                            2015                            </option>
+                                                        <option value="2014">
+                            2014                            </option>
+                                                        <option value="2013">
+                            2013                            </option>
+                                                        <option value="2012">
+                            2012                            </option>
+                                                        <option value="2011">
+                            2011                            </option>
+                                                        <option value="2010">
+                            2010                            </option>
+                                                        <option value="2009">
+                            2009                            </option>
+                                                        <option value="2008">
+                            2008                            </option>
+                                                        <option value="2007">
+                            2007                            </option>
+                                                        <option value="2006">
+                            2006                            </option>
+                                                    </select></li>
+                    <li>
+                        <div id="tk_input" class="cf">
+                            <ul>
+                                <li class="tk_text">타경</li>
+                                <li class="tk_bar">&nbsp;</li>
+                                <li><input maxlength="10" name="tno" type="text" placeholder="사건번호입력" class="tk_input"></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="shbtn"><a href="javascript:void(0)" onClick="frmChk()">검색</a></li>
+                    <li id="mnbtn" class="showme"><a href="#" title="전체메뉴">메뉴</a></li>
+                </ul>	
+				</form>
+            </div><!--tk-->
+		</div>                  
+    </div><!--lnb_wrap-->
+    
+    
+    
+    <!--/-->
+    <div id="nav_over" style="height:400px;">
+        <div id="nav_menu" class="container">
+            <ul class="cf">
+                <li>
+                    <div id="menus">
+                        <h2 id="menu_t01">경매검색</h2>
+                        <ul class="menus_sub">
+                            <li><a href="../search/search01.php">종합검색</a></li>
+                            <li><a href="../search/search02.php">법원별검색</a></li>
+                            <li><a href="../search/search03.php">일정별검색</a></li>
+                            <li><a href="../search/search04.php">역세권검색</a></li>
+                            <li><a href="../search/search05.php">신건검색</a></li>
+                            <li><a href="../search/search06.php">특수물건</a></li>
+                            <li><a href="../search/search07.php">테마물건</a></li>
+                            <li><a href="../search/search08.php">예정물건</a></li>
+                            <li><a href="../search/search09_jido.php" target="_blank">지도검색</a></li>
+							<li><a href="../search/search11.php">회원제보물건</a></li>
+                                                        <li><a href="../search/search16.php" style="color:#ffc90e;">낙찰가입력</a></li>
+                                                    </ul>
+                    </div>                            
+                </li>
+                <li>
+                    <div id="menus">
+                        <h2 id="menu_t02">공매검색</h2>
+                        <ul class="menu_s02">
+                            <li><a href="../public/public01.php">공매종합검색</a></li>                            
+                            <li><a href="../public/public02.php">처분신탁공매물건</a></li>
+                        </ul>
+                        
+                        <h4 id="menu_t03" style="display:none;">부실채권</h4>
+                        <ul class="menu_s03" style="display:none;">
+                            <li><a href="../npl/npl01.php">부실채권검색</a></li>
+                            <li><a href="../npl/npl02.php">부실채권이란</a></li>
+                        </ul>
+                    </div>                          
+                </li>
+                <li>
+                    <div id="menus">
+                        <h2 id="menu_t04">추천물건</h2>
+                        <ul class="menu_s04">
+                        	<li><a href="../recom/recom05.php">추천물건시스템 안내</a></li>
+                            <li><a href="../recom/recom01.php">일반물건</a></li>
+                            <li><a href="../recom/recom02.php">특수물건</a></li>
+							<li><a href="../bbs/bbs_list.php?code=gongnotice">공매추천물건</a></li>
+                            <li><a href="../billgate/" style="color:#ffc90e;">결제안내</a></li>
+                        </ul>
+                    </div>                            
+                </li>
+                <li>
+                    <div id="menus">
+                        <h2 id="menu_t05">아너스클럽</h2>
+                        <ul class="menu_s05">
+                            <li><a href="../annual/annual01.php">공지사항</a></li>
+                            <li><a href="../recom/recom03.php">추천물건</a></li>
+                            <li><a href="../annual/annual03.php">정변호사특별칼럼</a></li>
+                            <li><a href="../annual/annual04.php">해피드림s소식</a></li>
+                            <li><a href="../annual/annual05.php">특별동영상강의</a></li>
+                        </ul>
+                    </div>                            
+                </li>
+                <li>
+                    <div id="menus">
+                        <h2 id="menu_t06">교육/커뮤니티</h2>
+                        <ul class="menu_s06">
+                            <li><a href="../comu/comu01.php">공지사항</a></li>
+                            <li><a href="../comu/comu02.php">보도자료</a></li>
+                            <li><a href="../comu/comu03.php">정변호사칼럼</a></li>
+                            <li><a href="../comu/comu04.php">전문가칼럼</a></li>
+                            <li><a href="../comu/comu05.php">3억원프로젝트</a></li>
+                            <li><a href="../comu/comu06.php">경매낙찰수기</a></li>
+                            <li><a href="https://cafe.naver.com/acutionangel" target="_blank">행꿈사아카데미</a></li>
+                            <li><a href="https://www.haengkkumsa.com" target="_blank">행꿈사닷컴</a></li>
+                            <li><a href="../comu/comu09.php">해피머니/대출안내</a></li>
+							<!--li><a href="../comu/comu11.php">자료실</a></li-->
+                        </ul>                                               
+                    </div>
+                </li>
+                <li>
+                    <div id="menus">
+                        <h2 id="menu_t07">회사소개</h2>
+                        <ul class="menu_s07">
+                            <li><a href="../company/company01.php">인사말</a></li>
+                            <!--li><a href="../company/company02.php">공지사항</a></li-->
+                            <li><a href="../company/company03.php">행꿈사갤러리</a></li>
+							<li><a href="../company/company07.php">행꿈사옥션TV</a></li>
+                            <li><a href="../company/company04.php">행꿈사옥션컨설팅</a></li>
+                            <li><a href="../company/company04.php">오시는길</a></li>
+                        </ul>
+                    </div>                            
+                </li>
+                <li>
+                    <div id="menus">
+                        <h2 id="menu_t08">멤버십</h2>
+                        <ul class="menu_s08">
+                            <li><a href="../member/member01.php">로그인</a></li>
+                            <li><a href="../member/member02.php">회원가입</a></li>
+                            <li><a href="../member/member03.php">ID/PW찾기</a></li>
+                            <li><a href="../member/member04.php">이용약관</a></li>
+                            <li><a href="../member/member05.php">개인정보취급방침</a></li>
+                            <li><a href="../billgate/" style="color:#ffc90e;">결제안내</a></li>
+                        </ul>
+                    </div>                            
+                </li>
+                <li style="display:none;">
+                    <div id="menus">
+                        <h2 id="menu_t09">hksauction.com공투</h2>
+                        <ul class="menu_s09">
+                            <li><a href="../jinvest/jinvest01.php">공투안내</a></li>
+                            <li><a href="../jinvest/jinvest02.php">공투진행상품</a></li>
+                            <li><a href="../jinvest/jinvest03.php">공투완료</a></li>
+							<li><a href="../jinvest/jinvest04.php">투자문의</a></li>
+                        </ul>
+                        
+                        <h3 id="menu_t10">hksauction.com개발사업</h3>
+                        <ul class="menu_s10">
+                            <li><a href="../invest/invest01.php">개발진행사업</a></li>
+                            <!--li><a href="../invest/invest02.php">사업완료</a></li-->
+                        </ul>
+                    </div>                            
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--/-->
+
+<!--div id="m_down">
+    <div id="m_down01" class="bubble_nav">
+    	<ul>
+            <li><a href="../search/search01.php">종합검색</a></li>                            
+            <li><a href="../search/search02.php">법원별검색</a></li>
+            <li><a href="../search/search03.php">일정별검색</a></li>
+            <li><a href="../search/search04.php">역세권검색</a></li>
+            <li><a href="../search/search05.php">신건검색</a></li>
+            <li><a href="../search/search06.php">특수물건</a></li>
+            <li><a href="../search/search07.php">테마물건</a></li>
+            <li><a href="../search/search08.php">예정물건</a></li>
+            <li><a href="../search/search09.php">지도검색</a></li>
+        </ul>
+    </div>
+    
+    <div id="m_down02">
+    	<ul>
+            <li><a href="../public/public01.php">공매종합검색</a></li>
+        </ul>
+    </div>
+    
+ </div-->       
+    <div id="counsel_go" style="display:none;">
+    	<a href="/company/company04.php"><img src="../images/counsel_ban.png" alt="" /></a>
+    </div>
+    
+    
+<!--/click_payer/-->
+<script>
+function setVisible(v) {  // 버튼을 클릭하면 레이러를 보이게 하는 소스
+var t=document.getElementById("mcm_submit");
+if (v)
+t.style.visibility="visible";
+}
+</script> 
+<!--/click_payer/-->
+
+<div id="mcm_submit_wrap">
+	<div id="show_layer">
+    	<a href="javascript:setVisible(true);" title="경매상담열기">상담<br>신청</a>
+    </div>
+    <div id="mcm_submit" class="cf">
+    	<div id="mcm_close"><a href="#none" onclick="mcm_submit.style.visibility='hidden';">닫기</a></div>
+		<div id="mcm_top">
+			<a href="/company/company04.php"><img src="../images/counsel_ban.png" alt="" /></a>
+		</div>
+	</div>        
+</div><!---->    
+    
+    
+    
+</div><!--header_wrap-->
+<div id="sub_contents" class="cf container">
+	<div id="sub_left">
+    	<ul>
+    		<li>
+            	<div id="sub_menu">
+    <h3>경매물건검색 <span class="sub_eng"><p> search</p></span></h3>
+    <ul>
+        <li><a href="../search/search01.php">종합검색</a></li>
+        <li><a href="../search/search02.php">법원별검색</a></li>
+        <li><a href="../search/search03.php">일정별검색</a></li>
+		        <li><a href="../search/search05.php">신건검색</a></li>
+        <li><a href="../search/search09_jido.php" target="_blank">지도검색</a></li>
+        <li><a href="../search/search06.php">특수물건</a></li>
+        <li><a href="../search/search07.php">테마물건</a></li>
+        <li><a href="../search/search08.php">예정물건</a></li>
+		<li><a href="../search/search11.php">회원제보물건</a></li>
+				<li><a href="../search/search16.php">낙찰가입력</a></li>
+		    </ul>
+</div>            </li><!--menu-->
+            
+            <li>
+            	<div id="call_center">
+                	<h4>☎ Call Center</h4>
+                    <ul>
+                        <li>02-3471-8883</li>
+                        <!--li>02-3471-8866 </li-->
+                    </ul>
+                    <p>AM 9:00 ~ PM 6:00<br>점심시간 : PM 12:00 ~ 1:00 (토, 일, 공휴일 휴무)</p>
+                </div>
+            </li>
+            <li>
+            	<div id="poket_schedule" style="width:100%;height:200px;">
+	<div id="load_calendar" style="display:inline-block;width:100%;height:200px;text-align:center;">
+		<img src="/images/loads.gif">
+	</div>
+	<div id="mc_list" style="display:none;width:100%;height:200px;"></div>  
+</div>            </li>
+            <li>
+            	<div id="main_account">
+	<div id="bank_title" class="cf">
+		<h4>입금계좌 안내</h4>
+    </div><!--bank_title-->
+	<div id="bank_txt">
+    	<ul>
+    		<li><img src="../images/woori.png" alt="우리은행" title="우리은행" /></li>
+    		<li class="bankt01">1005-102-462509</li>
+    		<li class="bankt02">예금주 : 행꿈사옥션</li>
+    	</ul>
+        <hr />
+    	<ul>
+    		<li><img src="../images/nhb.png" alt="농협은행" title="농협은행" /></li>
+    		<li class="bankt01">351-1022-6817-53</li>
+    		<li class="bankt02">예금주 : 행꿈사옥션</li>
+    	</ul>
+    </div>
+</div>            </li>
+    	</ul>
+    </div><!--sub_left-->
+    
+    <div id="sub_right">
+    	<div id="sub_title" class="cf">
+        	<h5>종합검색</h5>
+            <div id="category">
+            	<p>HOME&nbsp;>&nbsp;경매물건검색&nbsp;>&nbsp;<span class="carecory_color">종합검색</span></p>
+            </div>
+        </div>
+        
+        <div id="sub_page">
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		var select = $('.select-script select');
+		select.change(function(){
+			var select_name = $(this).children('option:selected').text(); 
+			$(this).siblings("label").text(select_name);
+		});
+
+	});
+</script>
+
+<script language="javascript">
+<!--
+function CharInit() {
+	$("#acourt").change(function(){
+		loadChar($(this));
+	});
+	loadChar($("#acourt"));
+}
+function loadChar(obj) {
+	var arr=[], html=""; 
+	if(obj.attr("id")=="acourt") {
+		$("#acharge").children().remove();
+		$("#acharge").append("<option value=''>계전체</option>");
+	}
+	var dataR = "acourt="+$("#acourt").val();
+	$.ajax({
+		type: "post",
+		url: "../search/ChargeSearch.php",
+		data: dataR,
+		dataType: "xml",
+		beforeSend: function(){	
+		},
+		success: function(xml){
+			$(xml).find("item").each(function(){
+	    		var $entry=$(this);
+	    		arr.push("<option value='"+$entry.find("char_code").text()+"'>"+$entry.find("char_name").text()+"</option>");
+	    	});
+	    	html=arr.join("");	
+		    var obj_id=$(xml).find("obj_id").text();
+		    if(obj_id=="acharge"){
+		    	$("#acharge").children().remove();
+		    	$("#acharge").append("<option value=''>계전체</option>");
+		    }
+		    $("#"+obj_id).append(html);
+	    	if(obj.attr("id")=="acourt" && $("#acharge_01").val() > 0) {				
+				setTimeout(function(){
+					$("#acharge option[value="+$("#acharge_01").val()+"]").attr("selected",true);
+					$("#acharge_01").val(0);
+				},10);
+				return;
+			}
+		}
+	});
+}
+function addrInit()
+{
+	$("#address1_01").change(function(){
+		loadAddr($(this));
+	});
+	$("#address1_02").change(function(){
+		loadAddr($(this));
+	});
+	
+	loadAddr($("#address1_01"));
+	
+}
+
+function loadAddr(obj)
+{
+	var arr=[], html="";
+
+	if(obj.attr("id")=="address1_01")
+	{
+		$("#address1_02").children().remove();
+		$("#address1_03").children().remove();
+		$("#address1_02").append("<option value=''>구/군</option>");
+		$("#address1_03").append("<option value=''>읍/면/동</option>");
+		
+		
+	}
+	if(obj.attr("id")=="address1_02")
+	{
+	
+		$("#address1_03").children().remove();
+		$("#address1_03").append("<option value=''>읍/면/동</option>");
+		
+	}
+
+		var dataR = "address1_01="+$("#address1_01").val()+"&address1_02="+$("#address1_02").val();
+
+	
+	$.ajax({
+		type: "post",
+		url: "../search/addressSearch3.php",
+		
+		data: dataR,
+		
+		dataType: "xml",
+		beforeSend: function(){
+			
+		},
+		
+		success: function(xml){
+		
+			$(xml).find("item").each(function(){
+	    	var $entry=$(this);
+	    	arr.push("<option value='"+$entry.find("addr_code").text()+"'>"+$entry.find("addr_name").text()+"</option>");
+	    	});
+	    	html=arr.join("");
+	    	
+	    	
+		    	var obj_id=$(xml).find("obj_id").text();
+		    	
+		    	if(obj_id=="address1_02"){
+		    		$("#address1_02").children().remove();
+		    			$("#address1_02").append("<option value=''>구/군</option>");
+	
+		    	}
+		    		if(obj_id=="address1_03"){
+		    		$("#address1_03").children().remove();
+		    			$("#address1_03").append("<option value=''>읍/면/동</option>");
+		    	}
+		    	$("#"+obj_id).append(html);
+	    	
+	    		    	
+	    	//IE6.0 을 위하여 setTimeout 으로 처리
+	    	if(obj.attr("id")=="address1_01" && $("#address2_01").val() > 0)
+			{				
+				setTimeout(function(){
+					$("#address1_01 option[value="+$("#address1_01").val()+"]").attr("selected",true);
+					$("#address2_01").val(0);
+					loadAddr($("#address1_02"));
+				},10);
+				return;
+			}
+			
+			if(obj.attr("id")=="address1_02" && $("#address2_02").val() > 0)
+			{
+				setTimeout(function(){
+					$("#address1_02 option[value="+$("#address2_02").val()+"]").attr("selected",true);
+					$("#address2_02").val(0);
+					loadAddr($("#address1_03"));
+				},10);
+				return;
+			}
+			
+			if(obj.attr("id")=="address1_03" && $("#address2_03").val() > 0)
+			{
+				setTimeout(function(){
+					$("#address1_03 option[value="+$("#address2_03").val()+"]").attr("selected",true);
+					$("#address2_03").val(0);
+				},10);
+			}
+		}
+	});
+	return false;
+}
+//-->
+</script>
+
+<script>
+//용도별 검색폼 체크
+function Usageform_Check(){
+		var frm = document.frm;
+	var ex_f_date =frm.ipdate1.value.split('-');
+		var ex_l_date = frm.ipdate2.value.split('-');;
+		
+		var f_date = new Date(ex_f_date[0],ex_f_date[1],ex_f_date[2]);
+		var l_date = new Date(ex_l_date[0],ex_l_date[1],ex_l_date[2]);
+		
+		var day_calc = (l_date.getTime()-f_date.getTime())/(24*60*60*1000);
+		
+		
+			if(day_calc > 365)
+			{
+				alert('1년 사이의 물건만 조회 가능합니다.');
+				return false;
+			}
+		
+		//alert(day_calc);
+		//return false;
+		
+		var tmp = "";
+		var u = 0;
+
+		for(i=0;i<document.frm.usage_code.length;i++){
+
+			if(document.frm.usage_code[i].checked == true && document.frm.usage_code[i].value != "") {
+			
+				if(u == 0) {
+					tmp = document.frm.usage_code[i].value;
+				}
+				else {
+					tmp = tmp + "," + document.frm.usage_code[i].value;
+				}
+			u++;			
+			}
+			
+		}
+
+		document.frm.usage_codes.value = tmp;
+				chkFrm(frm);
+				document.frm.submit();
+}
+function chkFrm(frm){
+	var tmp = "";
+	var u = 0;
+	for(i=0;i<frm.spe.length;i++){
+		if(frm.spe[i].checked == true && frm.spe[i].value != "") {
+			if(u == 0) {
+				tmp = frm.spe[i].value;
+			} else {
+				tmp = tmp + "," + frm.spe[i].value;
+			}
+			u++;			
+		}
+	}
+	frm.spe_age.value = tmp;	
+}
+//용도별 검색폼 체크
+function Usageform_Check2(frm){
+	
+	
+	
+	var ex_f_date =frm.ipdate1.value.split('-');
+		var ex_l_date = frm.ipdate2.value.split('-');;
+		
+		var f_date = new Date(ex_f_date[0],ex_f_date[1],ex_f_date[2]);
+		var l_date = new Date(ex_l_date[0],ex_l_date[1],ex_l_date[2]);
+		
+		var day_calc = (l_date.getTime()-f_date.getTime())/(24*60*60*1000);
+		
+		
+			if(day_calc > 186)
+			{
+				alert('6개월 사이의 물건만 조회 가능합니다.');
+				return false;
+			}
+	
+		
+		var tmp = "";
+		var u = 0;
+		
+		for(i=0;i<document.frm.usage_code.length;i++){
+
+			if(document.frm.usage_code[i].checked == true && document.frm.usage_code[i].value != "") {
+			
+				if(u == 0) {
+					tmp = document.frm.usage_code[i].value;
+				}
+				else {
+					tmp = tmp + "," + document.frm.usage_code[i].value;
+				}
+			u++;			
+			}
+			
+		}
+		document.frm.usage_codes.value = tmp;
+		
+		document.frm.action = './favorite_save.php';
+		document.frm.submit();
+
+}
+
+function form_reset() {
+	
+	document.frm.reset();
+	
+	document.frm.address1_01[0].selected = true;
+	document.frm.address1_02[0].selected = true;
+	document.frm.address1_03[0].selected = true;
+	document.frm.acourt[0].selected = true;
+	document.frm.office.value = "";
+		document.frm.ipdate1.value = "2024-01-21";
+	document.frm.ipdate2.value = "2024-03-21";
+	
+	document.frm.search_usage2[0].selected = true;
+	document.frm.eprice1[0].selected = true;
+	document.frm.eprice2[0].selected = true;
+	document.frm.mprice1[0].selected = true;
+	document.frm.mprice2[0].selected = true;
+	document.frm.apoint1[0].selected = true;
+	document.frm.apoint2[0].selected = true;
+	document.frm.aresult[0].selected = true;
+	document.frm.aorder[0].selected = true;
+	
+	document.frm.search_addr1[0].selected = true;
+	document.frm.search_addr_str.value = "";
+
+}
+
+
+function Condition_Check(frm){
+			
+		var tmp = "";
+		var u = 0;
+		
+		for(i=0;i<document.frm.usage_code.length;i++){
+
+			if(document.frm.usage_code[i].checked == true && document.frm.usage_code[i].value != "") {
+			
+				if(u == 0) {
+					tmp = document.frm.usage_code[i].value;
+				}
+				else {
+					tmp = tmp + "," + document.frm.usage_code[i].value;
+				}
+			u++;			
+			}		
+		}
+				var tmp2 = "";
+		var u2 = 0;
+		for(i2=0;i2<document.frm.spe.length;i2++){
+			if(document.frm.spe[i2].checked == true && document.frm.spe[i2].value != "") {
+				if(u2 == 0) {
+					tmp2 = document.frm.spe[i2].value;
+				} else {
+					tmp2 = tmp2 + "," + document.frm.spe[i2].value;
+				}
+				u2++;			
+			}
+		}
+		document.frm.spe_age.value = tmp2;	
+				document.frm.usage_codes.value = tmp;
+		document.frm.pagename.value = "search01.php";
+		document.frm.action = '/mypage/condition_save.php';
+		document.frm.submit();
+}
+
+function Condition_Check2(frm){			
+	
+		document.frm.action = '/mypage/condition_save.php';
+		document.frm.submit();
+}
+function serChkEnter_s(){
+	if (event.keyCode == 13) {
+		Usageform_Check();
+	}
+}
+function checkspe(str){
+	if(str == "sand"){
+		$("input:checkbox[name='speand2']").prop("checked", false);
+	} else {
+		$("input:checkbox[name='speand1']").prop("checked", false);
+	}          
+}
+</script>
+
+<div id="sf_title">
+	<p>경매물건 상세검색</p>
+</div>  
+<style>
+.ipclass img {margin-left:5px;cursor:pointer;vertical-align:middle;}
+</style>
+<div id="search_form_wrap">                              
+    <div id="search_form">
+		<form name="frm" action="search_list.php" method="get" onSubmit="return Usageform_Check(this)">       
+		<input type="hidden" name="usage_codes" />
+		<input type="hidden" name="pagename" />
+				<input type="hidden" name="spe_age">
+								        <div id="search_all">
+            <table class="tbl_search">
+              <tr>
+                <th>법원</th>
+                <td><select name="acourt" id="acourt">
+                        <option value="">전체</option>
+                                                     <option value="210" >서울중앙지방법원</option>
+                                                        <option value="211" >서울동부지방법원</option>
+                                                        <option value="212" >서울남부지방법원</option>
+                                                        <option value="213" >서울북부지방법원</option>
+                                                        <option value="215" >서울서부지방법원</option>
+                                                        <option value="214" >의정부지방법원</option>
+                                                        <option value="214807" >고양지원</option>
+                                                        <option value="250899" >남양주지원</option>
+                                                        <option value="240" >인천지방법원</option>
+                                                        <option value="241" >부천지원</option>
+                                                        <option value="250" >수원지방법원</option>
+                                                        <option value="251" >성남지원</option>
+                                                        <option value="252" >여주지원</option>
+                                                        <option value="253" >평택지원</option>
+                                                        <option value="250826" >안산지원</option>
+                                                        <option value="250827" >안양지원</option>
+                                                        <option value="260" >춘천지방법원</option>
+                                                        <option value="261" >강릉지원</option>
+                                                        <option value="262" >원주지원</option>
+                                                        <option value="263" >속초지원</option>
+                                                        <option value="264" >영월지원</option>
+                                                        <option value="270" >청주지방법원</option>
+                                                        <option value="271" >충주지원</option>
+                                                        <option value="272" >제천지원</option>
+                                                        <option value="273" >영동지원</option>
+                                                        <option value="280" >대전지방법원</option>
+                                                        <option value="281" >홍성지원</option>
+                                                        <option value="282" >논산지원</option>
+                                                        <option value="283" >천안지원</option>
+                                                        <option value="284" >공주지원</option>
+                                                        <option value="285" >서산지원</option>
+                                                        <option value="310" >대구지방법원</option>
+                                                        <option value="320" >대구서부지원</option>
+                                                        <option value="311" >안동지원</option>
+                                                        <option value="312" >경주지원</option>
+                                                        <option value="313" >김천지원</option>
+                                                        <option value="314" >상주지원</option>
+                                                        <option value="315" >의성지원</option>
+                                                        <option value="316" >영덕지원</option>
+                                                        <option value="317" >포항지원</option>
+                                                        <option value="410" >부산지방법원</option>
+                                                        <option value="250828" >부산서부지원</option>
+                                                        <option value="412" >부산동부지원</option>
+                                                        <option value="411" >울산지방법원</option>
+                                                        <option value="420" >창원지방법원</option>
+                                                        <option value="421" >진주지원</option>
+                                                        <option value="422" >통영지원</option>
+                                                        <option value="423" >밀양지원</option>
+                                                        <option value="425" >마산지원</option>
+                                                        <option value="424" >거창지원</option>
+                                                        <option value="510" >광주지방법원</option>
+                                                        <option value="511" >목포지원</option>
+                                                        <option value="512" >장흥지원</option>
+                                                        <option value="513" >순천지원</option>
+                                                        <option value="514" >해남지원</option>
+                                                        <option value="520" >전주지방법원</option>
+                                                        <option value="521" >군산지원</option>
+                                                        <option value="522" >정읍지원</option>
+                                                        <option value="523" >남원지원</option>
+                                                        <option value="530" >제주지방법원</option>
+                                                </select>
+                    <select name="acharge" id="acharge">
+						<OPTION value="">계전체</OPTION>
+					</select>
+					<input type="hidden" name="acharge_01" id="acharge_01" value=""></td>
+                <th>사건번호</th>
+                <td><SELECT name="sno" >
+                        <OPTION value="" selected="selected">전체</OPTION>
+                                                                     <option value="2024" >2024</option>
+                                                <option value="2023" >2023</option>
+                                                <option value="2022" >2022</option>
+                                                <option value="2021" >2021</option>
+                                                <option value="2020" >2020</option>
+                                                <option value="2019" >2019</option>
+                                                <option value="2018" >2018</option>
+                                                <option value="2017" >2017</option>
+                                                <option value="2016" >2016</option>
+                                                <option value="2015" >2015</option>
+                                                <option value="2014" >2014</option>
+                                                <option value="2013" >2013</option>
+                                                <option value="2012" >2012</option>
+                                                <option value="2011" >2011</option>
+                                                <option value="2010" >2010</option>
+                                                <option value="2009" >2009</option>
+                                                <option value="2008" >2008</option>
+                                                <option value="2007" >2007</option>
+                                                <option value="2006" >2006</option>
+                                                <option value="2005" >2005</option>
+                                                <option value="2004" >2004</option>
+                                                <option value="2003" >2003</option>
+                                                <option value="2002" >2002</option>
+                                                <option value="2001" >2001</option>
+                                                <option value="2000" >2000</option>
+                                                <option value="1999" >1999</option>
+                                                <option value="1998" >1998</option>
+                                                <option value="1997" >1997</option>
+                                                <option value="1996" >1996</option>
+                                                                </SELECT>  &nbsp;타경&nbsp;<input type="text"  name="tno" value="" maxlength="10" style="width:82px;" onKeyDown="serChkEnter_s()"></td>
+              </tr>
+              <tr>
+                <th>소재지</th>
+                <td><select name="address1_01"  id="address1_01" >
+                      <option value="">전체</option>
+                        <option value="10" >서울</option> 
+                        <option value="12" >인천</option>
+                        <option value="3" >경기</option> 
+                        <option value="8" >대전</option> 
+                        <option value="6" >광주</option> 
+                        <option value="7" >대구</option> 
+                        <option value="9" >부산</option> 
+                        <option value="11" >울산</option>
+                        <option value="2" >강원</option> 											
+                        <option value="16" >충남</option> 
+                        <option value="17" >충북</option> 
+                        <option value="18" >세종</option> 
+                        <option value="13" >전남</option> 
+                        <option value="14" >전북</option> 
+                        <option value="4" >경남</option> 
+                        <option value="5" >경북</option> 
+                        <option value="15" >제주</option> 
+                    </select>&nbsp;<select name="address1_02"  id="address1_02">
+                      <option value="">전체</option>
+                    </select>&nbsp;<select name="address1_03"  id="address1_03" >
+                      <option value="">전체</option>
+                    </select>
+                    <input type="hidden" name="address2_01"  id="address2_01"  value="">
+                    <input type="hidden" name="address2_02"  id="address2_02"  value="">
+                    <input type="hidden" name="address2_03"  id="address2_03"  value="">
+                    <!--div id="plus_add"><a href="#">+</a></div>
+                    <div id="plus__wrap">
+                        <ul class="cf">
+                            <li>서울시 영등포구 방화동</li>
+                            <li><a href="#">-</a></li>
+                        </ul>
+                        <ul class="cf">
+                            <li>서울시 영등포구 방화동</li>
+                            <li><a href="#">-</a></li>
+                        </ul>
+                    </div-->
+				</td>
+                <th>지번범위</th>
+                <td><select name="area_js" id="area_js">
+                    <option value="">전체</option>
+					<option value="1" >일반</option> 
+					<option value="2" >산</option> 
+                </select>
+                &nbsp;<input type="text" name="bunji1" value="" maxlength="6" style="width:65px">
+                ~
+                <input type="text" name="bunji2" value="" maxlength="6" style="width:65px"></td>
+              </tr>
+              <tr class="ipclass">
+                <th>매각기일</th>
+                <td><script>
+						jQuery(function($){
+							$.datepicker.regional["ko"] = {
+							closeText: "닫기",
+							prevText: "이전달",
+							nextText: "다음달",
+							currentText: "오늘",
+							monthNames: ["1월(JAN)","2월(FEB)","3월(MAR)","4월(APR)","5월(MAY)","6월(JUN)", "7월(JUL)","8월(AUG)","9월(SEP)","10월(OCT)","11월(NOV)","12월(DEC)"],
+							dayNamesMin: ["일","월","화","수","목","금","토"],
+							weekHeader: "Wk",
+							dateFormat: "yy-mm-dd",
+							firstDay: 0,
+							yearSuffix: ""
+							};
+							$.datepicker.setDefaults($.datepicker.regional["ko"]);
+						});
+					</script>
+				<input type="text" style="width:80px;" name="ipdate1" id="ipdate1" value="2024-01-21"> ~ <input type="text"style="width:80px;" name="ipdate2" id="ipdate2" value="2024-07-21">
+				<script>
+					$(function(){
+						$("#ipdate1, #ipdate2").datepicker({ dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99"});
+					});
+				</script>
+                                            </td>
+                <th>간편검색</th>
+                <td><select name="search_addr1" >
+                     <option value="">전체</option>
+                                            <option value="10" >서울</option> 
+                                                <option value="12" >인천</option>
+                                                <option value="3" >경기</option> 
+                                                <option value="8" >대전</option> 
+                                                <option value="6" >광주</option> 
+                                                <option value="7" >대구</option> 
+                                                <option value="9" >부산</option> 
+                                                <option value="11" >울산</option>
+                                                <option value="2" >강원</option> 											
+                                                <option value="16" >충남</option> 
+                                                <option value="17" >충북</option> 
+                                                <option value="18" >세종</option> 
+                                                <option value="13" >전남</option> 
+                                                <option value="14" >전북</option> 
+                                                <option value="4" >경남</option> 
+                                                <option value="5" >경북</option> 
+                                                <option value="15" >제주</option> 
+                                              </select>&nbsp;
+                                              <input type="text" name="search_addr_str" value="" size="8" onKeyDown="serChkEnter_s()"> ex.구로2동 →구로</td>
+              </tr>
+              <tr>
+                <th>감정가</th>
+                <td><select name="eprice1" >
+                                <option value="0">전체</option>
+                                <option value="5000000" >5백만원</option>
+                                <option value="10000000" >1천만원</option>
+                                <option value="30000000" >3천만원</option>
+                                <option value="50000000" >5천만원</option>
+                                <option value="70000000" >7천만원</option>
+                                <option value="100000000" >1억</option>
+                                <option value="200000000" >2억</option>
+                                <option value="300000000" >3억</option>
+                                <option value="400000000" >4억</option>
+                                <option value="500000000" >5억</option>
+								<option value="600000000" >6억</option>
+								<option value="700000000" >7억</option>
+								<option value="800000000" >8억</option>
+								<option value="900000000" >9억</option>
+                                <option value="1000000000" >10억</option>
+                                <option value="2000000000" >20억</option>
+                                <option value="4000000000" >40억</option>
+                                <option value="6000000000" >60억</option>
+                                <option value="8000000000" >80억</option>
+                                <option value="10000000000" >100억</option>
+                                </select>
+                                ~ 
+                        <select name="eprice2" >
+                                <option value="0">전체</option>
+                                <option value="5000000" >5백만원</option>
+                                <option value="10000000" >1천만원</option>
+                                <option value="30000000" >3천만원</option>
+                                <option value="50000000" >5천만원</option>
+                                <option value="70000000" >7천만원</option>
+                                <option value="100000000" >1억</option>
+                                <option value="200000000" >2억</option>
+                                <option value="300000000" >3억</option>
+                                <option value="400000000" >4억</option>
+                                <option value="500000000" >5억</option>
+								<option value="600000000" >6억</option>
+								<option value="700000000" >7억</option>
+								<option value="800000000" >8억</option>
+								<option value="900000000" >9억</option>
+                                <option value="1000000000" >10억</option>
+                                <option value="2000000000" >20억</option>
+                                <option value="4000000000" >40억</option>
+                                <option value="6000000000" >60억</option>
+                                <option value="8000000000" >80억</option>
+                                <option value="10000000000" >100억</option>
+                                </select></td>
+                <th>최저가</th>
+                <td><select name="mprice1">
+                                <option value="0">전체</option>
+                                <option value="5000000" >5백만원</option>
+                                <option value="10000000" >1천만원</option>
+                                <option value="30000000" >3천만원</option>
+                                <option value="50000000" >5천만원</option>
+                                <option value="70000000" >7천만원</option>
+                                <option value="100000000" >1억</option>
+                                <option value="200000000" >2억</option>
+                                <option value="300000000" >3억</option>
+                                <option value="400000000" >4억</option>
+                                <option value="500000000" >5억</option>
+								<option value="600000000" >6억</option>
+								<option value="700000000" >7억</option>
+								<option value="800000000" >8억</option>
+								<option value="900000000" >9억</option>
+                                <option value="1000000000" >10억</option>
+                                <option value="2000000000" >20억</option>
+                                <option value="4000000000" >40억</option>
+                                <option value="6000000000" >60억</option>
+                                <option value="8000000000" >80억</option>
+                                <option value="10000000000" >100억</option>
+                                </select>
+                                ~ 
+                                <select name="mprice2" >
+                                <option value="0">전체</option>
+                                <option value="5000000" >5백만원</option>
+                                <option value="10000000" >1천만원</option>
+                                <option value="30000000" >3천만원</option>
+                                <option value="50000000" >5천만원</option>
+                                <option value="70000000" >7천만원</option>
+                                <option value="100000000" >1억</option>
+                                <option value="200000000" >2억</option>
+                                <option value="300000000" >3억</option>
+                                <option value="400000000" >4억</option>
+                                <option value="500000000" >5억</option>
+								<option value="600000000" >6억</option>
+								<option value="700000000" >7억</option>
+								<option value="800000000" >8억</option>
+								<option value="900000000" >9억</option>
+                                <option value="1000000000" >10억</option>
+                                <option value="2000000000" >20억</option>
+                                <option value="4000000000" >40억</option>
+                                <option value="6000000000" >60억</option>
+                                <option value="8000000000" >80억</option>
+                                <option value="10000000000" >100억</option>
+                                </select></td>
+              </tr>
+			  <tr>
+                <th>건물면적</th>
+                <td>
+				<input type="text" maxlength="6" name="barea1" value="" style="width:65px">평~
+                <input type="text" maxlength="6" name="barea2" value="" style="width:65px;">평</td>
+                <th>토지면적</th>
+                <td>
+				<input type="text" maxlength="6" name="larea1" value="" style="width:65px;">평~
+                <input type="text" maxlength="6" name="larea2" value="" style="width:65px;">평</td>
+              </tr>
+			  <tr>
+                <th>건물명</th>
+                <td>
+				<input type="text" name="buildingtxt" value="" style="width:100px"></td>
+                <th>이해관계인</th>
+                <td>
+				<select name="np1">
+                <option value="">전체</option>
+                <option  value="채권자" >채권자</option>
+                </select>
+                <input type="text" name="np2" value="" style="width:65px"></td>
+              </tr>
+              <tr>
+                <th>유찰수</th>
+                <td><select name="apoint1">
+                                                <option value="">전체</option>
+                                                                                                <option value="1" >1</option>
+                                                                                                <option value="2" >2</option>
+                                                                                                <option value="3" >3</option>
+                                                                                                <option value="4" >4</option>
+                                                                                                <option value="5" >5</option>
+                                                                                                <option value="6" >6</option>
+                                                                                                <option value="7" >7</option>
+                                                                                                <option value="8" >8</option>
+                                                                                                <option value="9" >9</option>
+                                                                                                <option value="10" >10</option>
+                                                                                              </select>
+                                              ~
+                                              <select name="apoint2">
+                                                <option value="">전체</option>
+                                                                                                <option value="1" >1</option>
+                                                                                                <option value="2" >2</option>
+                                                                                                <option value="3" >3</option>
+                                                                                                <option value="4" >4</option>
+                                                                                                <option value="5" >5</option>
+                                                                                                <option value="6" >6</option>
+                                                                                                <option value="7" >7</option>
+                                                                                                <option value="8" >8</option>
+                                                                                                <option value="9" >9</option>
+                                                                                                <option value="10" >10</option>
+                                                                                              </select></td>
+                <th>경매종류</th>
+                <td><select name="regal">
+                <option value="">전체</option>
+                <option  value="임의경매" >임의경매</option>
+                <option  value="강제경매" >강제경매</option>
+                </select></td>
+              </tr>
+              <tr>
+                <th>정렬순서</th>
+                <td><select name="aorder">
+          <option value="">정렬방법</option>
+          <option value="a.appoint_result_date desc" >입찰일자↑</option>
+                                                <option value="a.appoint_result_date" >입찰일자↓</option>
+                                                <option value="b.event_year desc" >사건번호↑</option>
+                                                <option value="b.event_year" >사건번호↓</option>
+                                                <option value="a.sell_price desc" >감정가↑</option>
+                                                <option value="a.sell_price" >감정가↓</option>
+                                                <option value="a.lowest_price desc" >최저가↑</option>
+                                                <option value="a.lowest_price  >최저가↓</option>
+                                                <option value="a.appoint_count desc" >유찰회수↑</option>
+                                                <option value="a.appoint_count" >유찰회수↓</option>
+                                                <option value="a.view_count desc" >조회수↑</option>
+                                                <option value="a.view_count" >조회수↓</option>
+        </select></td>
+                <th>최종결과</th>
+                <td><select name="aresult">
+				<option value="">전체</option>
+                                    <option value="진행물건" selected>진행(유찰+재진행+신건)</option>
+                                    <option value="유찰+재진행" >유찰+재진행</option>
+                                    <option value="신건" >신건</option>
+                                    <option value="유찰" >유찰</option>
+                                    <option value="매각" >매각</option>
+                                    <option value="변경" >변경</option>
+                                    <option value="취하" >취하</option>
+                                    <option value="기각" >기각</option>
+                                    <option value="정지" >정지</option>
+                                    <option value="재진행" >재진행</option>
+                                    <option value="연기" >연기</option>
+                                    <option value="취소" >취소</option>
+                                    <option value="미진행" >미진행</option>
+                                    <option value="미종국" >미종국</option>
+                                    <option value="미확인" >미확인</option>
+                                    <option value="불허" >불허</option>
+                                    <option value="각하" >각하</option>
+                                    <option value="병합" >병합</option>
+                                    <option value="기한후납부" >기한후납부</option>
+                                  </select></td>
+              </tr>
+            </table>
+        </div>
+                      <div id="search_kinds">
+            <table class="tbl_kinds">
+							<tr>
+					<th style="font-size:1em"><input type="checkbox" class="checkbox" name="usage_code" onClick="check_Usage(this.checked,2,7);" value="" />&nbsp;주거용</th>
+					<td>
+						<ul>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="101" />아파트</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="102" />주택</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="103" />다세대(빌라)</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="104" />다가구(원룸등)</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="105" />근린주택</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="106" />오피스텔</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="107" />도시형생활주택</li>
+												</ul>
+					</td>
+				</tr>
+							<tr>
+					<th style="font-size:1em"><input type="checkbox" class="checkbox" name="usage_code" onClick="check_Usage(this.checked,10,27);" value="" />&nbsp;상업용</th>
+					<td>
+						<ul>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="201" />근린시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="202" />근린상가</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="203" />상가</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="204" />공장</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="205" />아파트형공장</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="206" />숙박시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="207" />주유소</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="208" />병원</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="209" />아파트상가</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="210" />창고</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="211" />목욕시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="212" />콘도(호텔)</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="213" />운동시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="214" />휴게시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="215" />노유자시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="216" />자동차관련시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="217" />펜션</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="218" />교육시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="219" />장례관련시설</li>
+												</ul>
+					</td>
+				</tr>
+							<tr>
+					<th style="font-size:1em"><input type="checkbox" class="checkbox" name="usage_code" onClick="check_Usage(this.checked,30,44);" value="" />&nbsp;토지</th>
+					<td>
+						<ul>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="301" />대지</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="302" />임야</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="303" />전</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="304" />답</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="305" />과수원</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="306" />잡종지</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="307" />공장용지</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="308" />도로</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="309" />목장용지</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="310" />창고용지</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="311" />유지</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="312" />하천</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="313" />구거</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="314" />기타토지</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="404" />주차장</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="405" />묘지</li>
+												</ul>
+					</td>
+				</tr>
+							<tr>
+					<th style="font-size:1em"><input type="checkbox" class="checkbox" name="usage_code" onClick="check_Usage(this.checked,47,55);" value="" />&nbsp;기타</th>
+					<td>
+						<ul>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="401" />축사</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="403" />학교</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="406" />광업권</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="407" />어업권</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="408" />농가시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="409" />종교시설</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="410" />기타</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="411" />선박</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="412" />차량</li>
+												<li style="font-size:0.9em"><input type="checkbox" class="checkbox" name="usage_code" value="413" />중장비</li>
+												</ul>
+					</td>
+				</tr>
+							<tr>
+					<th style="font-size:1em">특수물건</th>
+					<td>
+						<ul style="display:inline-block;">
+						<li style="font-size:0.9em"><input type="checkbox" name="spetot" value="tot" onClick="check_Usages(this.checked,1,21);"> 전체선택</li><li style="font-size:0.9em"><input type="checkbox" name="speand1" value="sand" onclick="checkspe('sand');"> 체크항목AND검색</li><li style="font-size:0.9em"><input type="checkbox" name="speand2" value="snot" onclick="checkspe('snot');"> 체크항목제외검색</li>						</ul>
+						<ul>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="유치권" > 유치권</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="법정지상권" > 법정지상권</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="분묘기지권" > 분묘기지권</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="지분" > 지분매각</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="토지지분매각" > 토지지분매각</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="건물매각" > 건물만매각</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="건물제외" > 토지만매각</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="선순위전세권_전세권" > 선순위전세권</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="선순위임차권_임차권설정" > 선순위임차권</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="선순위가등기_가등기" > 선순위가등기</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="선순위가처분_가처분" > 선순위가처분</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="대항력" > 대항력임차인</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="재진행" > 재진행/재매각</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="예고등기" > 예고등기</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="대지권미등기" > 대지권미등기</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="별도등기" > 별도등기</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="농지취득" > 농지취득자격증명</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="공유자우선매수신고" > 공유자매수신고</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="맹지" > 맹지</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="위반건축물" > 위반건축물</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="형식적_공유물분할" > 형식적경매</li>
+												   <li style="font-size:0.9em"><input type="checkbox" name="spe" value="병합_중복" > 병합/중복검색</li>
+												</ul>
+					</td>
+				</tr>
+            </table>
+        </div>
+		</form>
+		<div style="width:100%;height:10px"></div>
+		<div id="condition">
+    <div id="search_form_wrap">
+    <div id="search_form">
+        <table class="tbl_condition">
+              <tr>
+                <td colspan="2" height="30"><font  color="00654c">※  저장된 검색 조건중 원하시는 조건을 클릭하시면 간단히 원하시는 물건을 찾으실 수 있습니다.</font></td>
+              </tr>
+                                      <tr>
+                                <td height="25" align=center class="search" bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;지정된 검색조건이 없습니다.</td>
+                              </tr>
+                                                            
+                               		
+                    
+                            
+        </table>
+    </div> 
+    </div>    
+</div>        <div id="search_btn" class="cf">
+            <div id="btn01"><a href="javascript:void(0)" onclick="Usageform_Check();">검색하기</a></div>
+            <div id="btn02"><a href="javascript:void(0)"  onClick="document.frm.reset();"  title="검색조건을 초기화합니다.">검색초기화</a></div>
+			<div id="btn03"><a href="javascript:void(0)" onclick="Condition_Check();">검색조건저장</a></div>        </div>
+    </div>
+</div>    
+<SCRIPT type="text/JavaScript">
+<!--
+	CharInit();
+	addrInit();
+//-->
+</SCRIPT>		</div>
+        
+    </div>
+</div>
+
+<iframe id="mainques" name="mainques" width="0" height="0" frameborder="0"></iframe>
+<div id="topBtn" class="bottomNav" title="맨 위로">top</div>
+
+<div id="float_counsel" class="bottomNav" title="컨설팅상담">
+	<p><a href="../recom/recom04.php">컨설팅상담^^</a></p>
+</div>
+
+<!--script>
+function setVisible(v) {  // 버튼을 클릭하면 레이러를 보이게 하는 소스 
+var t=document.getElementById("layer1"); 
+if (v) 
+t.style.display="block"; 
+}  
+</script-->
+
+<div id="footer_wrap">
+	<div id="footer_icon_box" class="cf">
+    	<div class="container">
+            <div id="fib01">
+                <a href="/recom/recom04.php">빠른사건의뢰</a>
+            </div>
+            <div id="fib02">
+                <p>전문가상담의뢰 <span class="fib_yellow">02-3471-8883</span></p>
+            </div>
+            <div id="fib03">
+                <ul>
+                    <li class="fib_icon07"><a href="../billgate/">결제안내</a></li>
+                    <li class="fib_icon06"><a href="../company/company01.php">회사소개</a></li>
+                    <li class="fib_icon05"><a href="javascript:;view_layers('1');">등록증서</a></li>
+                    <li class="fib_icon04"><a href="https://pf.kakao.com/_daprb/chat" target="_blank">카카오톡</a></li>
+                    <li class="fib_icon03"><a href="https://cafe.naver.com/acutionangel" target="_blank">카페</a></li>
+                    <li class="fib_icon02"><a href="https://blog.naver.com/goodfellow91" target="_blank">블로그</a></li>
+                    <li class="fib_icon01"><a href="https://www.youtube.com/channel/UCNj4VVVJSLVARaQg_rp38zw" target="_blank">youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!--footer_icon_box-->
+    
+    <div id="footer_contents">
+    	<h3><img src="../images/footer_logo.png" alt="법무법인" /></h3>
+        
+        <div id="ft_privacy">
+           <a href="../company/company01.php">회사소개</a> <a href="../member/member04.php" class="impor">개인정보취급방침</a> <a href="../member/member05.php">이용약관</a> <a href="../company/company04.php">오시는길</a> <a href="javascript:;view_layers('2');">부동산전문변호사</a> <a href="https://cafe.naver.com/acutionangel" target="_blank">행꿈사카페</a> <a href="../company/company03.php">Gallery</a>
+        </div><!--ft_privacy-->
+        
+        <div id="ft_adress">
+        	상호 : 법무법인 열린  | 서울시 서초구 서초중앙로18길 43, 3층 |  대표이사 : 정충진  |   대표번호 :  02-3471-8883<br />팩스번호 : 02-3471-8484 |  사업자등록번호  : 214-88-98945  | 개인정보 보호책임자 : 김유진 <br />Copyright (C)hksauction.com 2021 All Right Reserved.
+    	</div><!--ft_adress-->  
+    </div>
+</div>	
+
+<div id="popup" style="display:none">
+     <span class="button_pop b-close"><span>X</span></span>
+      <div class="content"></div>
+</div> 
+<script src="/js/jquery.bpopup.min.js"></script>
+
+<script>
+	function view_layers(str){
+	     //e.preventDefault();
+	     $('#popup').bPopup({
+	     contentContainer:'.content',
+		 loadUrl:'../include/view_page.php?idx='+str 
+		});
+	}
+ </script><!--footer_wrap-->
+
+    
+</div><!--site_wrap-->
+<script src="../js/jquery.scrollTo-min.js" type="text/javascript"></script>
+<script language="javascript">
+<!--
+function cal_view(mode,str,obj){
+	if(obj=='') var fname = "#load_calendar";
+	else var fname =obj;
+	if(mode=="day"){
+		var loadurl = "/main/doc/day_vs.php?vdate="+str; 
+		var loaddiv = "#mc_list";
+	}
+	$.ajax({
+		type : "POST"
+		,url : loadurl
+		,dataType : "html"
+		,error : function(request,status,error){
+		}
+		,success : function(response,status,request){
+			$('#load_calendar').css("display", "none");
+			$(loaddiv).css("display", "block");
+			$(loaddiv).html(response);
+		}
+		,beforeSend: function(){ 
+			$(fname).fadeIn();
+		}
+		,complete : function(){
+			$(fname).fadeOut();
+		}
+	});	
+	return false;
+}
+$(document).ready(function() {
+	cal_view('day','','#load_banner'); 			
+});
+//-->
+</script>
+</body>
+</html>
